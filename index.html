@@ -125,18 +125,18 @@
             <div class="account-info">
                 <button onclick="toggleAccountInfo('groom')">신랑측 계좌번호 확인</button>
                 <div id="groom" class="hidden">
-                    <p>부: 김승현 - <span id="groom-father-account">123-456-7890</span> <button onclick="copyAccount('groom-father-account')">복사</button></p>
-                    <p>모: 이은혜 - <span id="groom-mother-account">123-456-7891</span> <button onclick="copyAccount('groom-mother-account')">복사</button></p>
-                    <p>신랑: 김이현 - <span id="groom-account">123-456-7892</span> <button onclick="copyAccount('groom-account')">복사</button></p>
+                    <p>부: 김아버지 - <span id="groom-father-account">123-456-7890</span> <button onclick="copyAccount('groom-father-account')">복사</button></p>
+                    <p>모: 김어머니 - <span id="groom-mother-account">123-456-7891</span> <button onclick="copyAccount('groom-mother-account')">복사</button></p>
+                    <p>신랑: 김신랑 - <span id="groom-account">123-456-7892</span> <button onclick="copyAccount('groom-account')">복사</button></p>
                 </div>
             </div>
 
             <div class="account-info">
                 <button onclick="toggleAccountInfo('bride')">신부측 계좌번호 확인</button>
                 <div id="bride" class="hidden">
-                    <p>부: 김정남 - <span id="bride-father-account">987-654-3210</span> <button onclick="copyAccount('bride-father-account')">복사</button></p>
-                    <p>모: 정연아 - <span id="bride-mother-account">987-654-3211</span> <button onclick="copyAccount('bride-mother-account')">복사</button></p>
-                    <p>신부: 김이나 - <span id="bride-account">987-654-3212</span> <button onclick="copyAccount('bride-account')">복사</button></p>
+                    <p>부: 이아버지 - <span id="bride-father-account">987-654-3210</span> <button onclick="copyAccount('bride-father-account')">복사</button></p>
+                    <p>모: 이어머니 - <span id="bride-mother-account">987-654-3211</span> <button onclick="copyAccount('bride-mother-account')">복사</button></p>
+                    <p>신부: 이신부 - <span id="bride-account">987-654-3212</span> <button onclick="copyAccount('bride-account')">복사</button></p>
                 </div>
             </div>
         </div>
@@ -179,6 +179,88 @@
     </script>
 </script>
 
+    <div class="share-buttons">
+        <button onclick="shareKakao();">카카오톡으로 공유하기</button>
+        <button onclick="shareLink();">링크로 공유하기</button>
+    </div>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // Kakao SDK 초기화
+        Kakao.init('d59123877a5163cbf1586b25970c56e2');
+
+        function shareKakao() {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '모바일 청첩장',
+                    description: '신랑 김수현 & 신부 김지원',
+                    imageUrl: 'wedding-photo.jpg',  // 공유할 이미지의 URL
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        function loadMessages() {
+            fetch('https://script.google.com/macros/s/AKfycbwQ6rlebT7NSFn2dlG_QskCjtdZqg9AF4QcsWRmP5HhXZO_1Za8N2i18PIM6P_YDmX4Nw/exec')
+                .then(response => response.json())
+                .then(data => {
+                    var messagesContainer = document.getElementById('messages-container');
+                    messagesContainer.innerHTML = '';
+                    data.forEach(row => {
+                        var messageDiv = document.createElement('div');
+                        messageDiv.className = 'message';
+                        messageDiv.innerHTML = '<h4>' + row[0] + ' | ' + new Date(row[1]).toLocaleString() + '</h4><p>' + row[2] + '</p>';
+                        messagesContainer.appendChild(messageDiv);
+                    });
+                });
+        }
+
+        function submitMessage() {
+            var name = document.getElementById('name-input').value;
+            var message = document.getElementById('message-input').value;
+            var xhr = new XMLHttpRequest();
+            var url = 'https://script.google.com/macros/s/AKfycbwQ6rlebT7NSFn2dlG_QskCjtdZqg9AF4QcsWRmP5HhXZO_1Za8N2i18PIM6P_YDmX4Nw/exec';
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    if (res.status === 'success') {
+                        var messagesContainer = document.getElementById('messages-container');
+                        var newMessage = document.createElement('div');
+                        newMessage.className = 'message';
+                        newMessage.innerHTML = '<h4>' + res.name + ' | ' + new Date(res.timestamp).toLocaleString() + '</h4><p>' + res.message + '</p>';
+                        messagesContainer.prepend(newMessage);
+                        document.getElementById('guestbook-form').reset();
+                    }
+                }
+            };
+            xhr.send('name=' + encodeURIComponent(name) + '&message=' + encodeURIComponent(message));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMessages);
+
+        function toggleAccountInfo(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        function copyAccount(id) {
+            var copyText = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(copyText).then(function() {
+                alert("계좌번호가 복사되었습니다.");
+            }, function(err) {
+                alert("복사에 실패했습니다. 다시 시도해주세요.");
+            });
+        }
 
         // Slide show functionality
         document.addEventListener('DOMContentLoaded', function() {
