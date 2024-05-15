@@ -128,4 +128,33 @@ function shareKakao() {
         }
     });
 }
+const KAKAOTALK_API_TOKEN = 'd59123877a5163cbf1586b25970c56e2';
+const KAKAOTALK_SHARE_IMAGE = 'https://example.com/path_to_your_image.jpg';
+const WEDDING_INVITATION_URL = 'https://example.com/your_invitation_page';
+const GROOM_NAME = '김이현';
+const BRIDE_NAME = '김이나';
+
+kakao.Link.createDefaultButton({
+  objectType: "feed",
+  container: "#sendKakao",
+  content: {
+    title: `${김이현}❤${김이나} 결혼식에 초대합니다`,
+    description: "아래의 '청첩장 열기' 버튼을 눌러 읽어주세요🤵👰",
+    imageUrl: KAKAOTALK_SHARE_IMAGE,
+    link: {
+      mobileWebUrl: https://yuna2121.github.io/wedding1/,
+      webUrl: https://yuna2121.github.io/wedding1/,
+    },
+  },
+  buttons: [
+    {
+      title: "청첩장 열기",
+      link: {
+        mobileWebUrl:https://yuna2121.github.io/wedding1/,
+        webUrl: https://yuna2121.github.io/wedding1/,
+      },
+    },
+  ],
+  installTalk: true,
+});
 
