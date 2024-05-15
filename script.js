@@ -103,3 +103,29 @@ function loadMessages() {
         });
 }
 
+
+function shareLink() {
+    const el = document.createElement('textarea');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('링크가 클립보드에 복사되었습니다.');
+}
+
+function shareKakao() {
+    Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '모바일 청첩장',
+            description: '신랑 김수현 & 신부 김지원',
+            imageUrl: 'wedding-photo.jpg',  // 공유할 이미지의 URL
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href
+            }
+        }
+    });
+}
+
