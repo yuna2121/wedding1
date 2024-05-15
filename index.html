@@ -17,6 +17,7 @@
         .section {
             margin-bottom: 40px;
         }
+
         .guestbook-section {
             margin: 20px;
         }
@@ -42,7 +43,7 @@
             display: none;
         }
         .flower-image {
-            width: 300px;
+            width: 300px; /* Adjust the size as needed */
             height: auto;
             margin-bottom: 20px;
         }
@@ -52,12 +53,28 @@
         .slide img {
             width: 100%;
         }
-        #daumRoughmapContainer1715763488690 {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
+        #daumRoughmapContainer1715763488690, .kakao-share-button {
+            border: 1px solid #ccc; /* 회색 테두리 추가 */
+            padding: 10px; /* 내용과 테두리 사이 간격 */
+            margin-bottom: 20px; /* 요소 아래 여백 */
         }
+
+        /* 카카오톡 공유 버튼 스타일 */
+        .kakao-share-button {
+            background-color: #fee500; /* 카카오톡 색상 */
+            color: black; /* 텍스트 색상 */
+            padding: 10px 20px; /* 패딩 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            display: inline-block; /* 인라인 블록 디스플레이 */
+            cursor: pointer; /* 커서 포인터 */
+            border-radius: 5px; /* 모서리 둥글게 */
+        }
+
+        /* 지도 컨테이너 스타일 */
+        #daumRoughmapContainer1715763488690 {
+            border-radius: 5px; /* 모서리 둥글게 */
+        }
+
     </style>
 </head>
 <body>
@@ -65,28 +82,33 @@
         <header class="invitation-header section">
             <h2>신랑 김이현 & 신부 김이나</h2>
         </header>
+
         <div class="invitation-image section">
             <img src="wedding-photo.jpg" alt="웨딩 사진">
             <p>Oh! Wedding Day</p>
         </div>
+
         <div class="mohshingeul-section section">
             <p>모 시 는 글</p>
             <p>저희 두 사람이<br>하나가 되는 새 인생을 시작합니다.<br>사랑으로 가득 채워 즐거움을 나누고<br>어려움은 이겨내는<br>함께 나아가는 삶을 꾸리겠습니다.<br>귀한 걸음 하시어 축복해주시면 감사하겠습니다.</p>
         </div>
+
         <div class="caption section">
             <p>wedding gallery</p>
             <h3>두 사람의 사랑을 담은 순간</h3>
         </div>
+
         <div class="gallery section">
             <div class="slides">
                 <div class="slide"><img src="wedding-photo1.jpg" alt="웨딩 사진 1"></div>
                 <div class="slide"><img src="wedding-photo2.jpg" alt="웨딩 사진 2"></div>
-                <div the="slide"><img src="wedding-photo3.jpg" alt="웨딩 사진 3"></div>
+                <div class="slide"><img src="wedding-photo3.jpg" alt="웨딩 사진 3"></div>
                 <div class="slide"><img src="wedding-photo4.jpg" alt="웨딩 사진 4"></div>
             </div>
             <button class="prev" onclick="prevSlide()">&#10094;</button>
             <button class="next" onclick="nextSlide()">&#10095;</button>
         </div>
+
         <div class="calendar-section section">
             <h4>우리의 특별한 날</h4>
             <p id="d-day"></p>
@@ -94,10 +116,12 @@
                 <img src="calendar-image.jpg" alt="캘린더 이미지" style="border-radius: 15px;">
             </div>
         </div>
+
         <div class="container section">
             <h1>축하의 마음을 전하세요</h1>
             <img src="path_to_flower_image.png" alt="꽃 이미지" class="flower-image">
             <p>축하의 마음을 담아 축의금을 전달해 보세요.</p>
+
             <div class="account-info">
                 <button onclick="toggleAccountInfo('groom')">신랑측 계좌번호 확인</button>
                 <div id="groom" class="hidden">
@@ -106,6 +130,7 @@
                     <p>신랑: 김신랑 - <span id="groom-account">123-456-7892</span> <button onclick="copyAccount('groom-account')">복사</button></p>
                 </div>
             </div>
+
             <div class="account-info">
                 <button onclick="toggleAccountInfo('bride')">신부측 계좌번호 확인</button>
                 <div id="bride" class="hidden">
@@ -115,6 +140,7 @@
                 </div>
             </div>
         </div>
+
         <div class="guestbook-section section">
             <h4>방명록</h4>
             <p>축하 메시지를 남겨주세요</p>
@@ -125,6 +151,7 @@
             </form>
             <div id="messages-container"></div>
         </div>
+
         <footer class="invitation-footer section">
             <p>2024년 5월 25일 토요일 오후 1시<br>신라호텔 영빈관</p>
             <div id="map"></div>
@@ -134,11 +161,13 @@
     <!-- * 카카오맵 - 지도퍼가기 -->
     <!-- 1. 지도 노드 -->
     <div id="daumRoughmapContainer1715763488690" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
     <!--
         2. 설치 스크립트
         * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
     -->
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
     <!-- 3. 실행 스크립트 -->
     <script charset="UTF-8">
         new daum.roughmap.Lander({
@@ -147,6 +176,138 @@
             "mapWidth" : "640",
             "mapHeight" : "360"
         }).render();
+    </script>
+</script>
+
+    <div class="share-buttons">
+        <button onclick="shareKakao();">카카오톡으로 공유하기</button>
+        <button onclick="shareLink();">링크로 공유하기</button>
+    </div>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // Kakao SDK 초기화
+        Kakao.init('d59123877a5163cbf1586b25970c56e2');
+
+        function shareKakao() {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '모바일 청첩장',
+                    description: '신랑 김수현 & 신부 김지원',
+                    imageUrl: 'wedding-photo.jpg',  // 공유할 이미지의 URL
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        function loadMessages() {
+            fetch('https://script.google.com/macros/s/AKfycbwQ6rlebT7NSFn2dlG_QskCjtdZqg9AF4QcsWRmP5HhXZO_1Za8N2i18PIM6P_YDmX4Nw/exec')
+                .then(response => response.json())
+                .then(data => {
+                    var messagesContainer = document.getElementById('messages-container');
+                    messagesContainer.innerHTML = '';
+                    data.forEach(row => {
+                        var messageDiv = document.createElement('div');
+                        messageDiv.className = 'message';
+                        messageDiv.innerHTML = '<h4>' + row[0] + ' | ' + new Date(row[1]).toLocaleString() + '</h4><p>' + row[2] + '</p>';
+                        messagesContainer.appendChild(messageDiv);
+                    });
+                });
+        }
+
+        function submitMessage() {
+            var name = document.getElementById('name-input').value;
+            var message = document.getElementById('message-input').value;
+            var xhr = new XMLHttpRequest();
+            var url = 'https://script.google.com/macros/s/AKfycbwQ6rlebT7NSFn2dlG_QskCjtdZqg9AF4QcsWRmP5HhXZO_1Za8N2i18PIM6P_YDmX4Nw/exec';
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    if (res.status === 'success') {
+                        var messagesContainer = document.getElementById('messages-container');
+                        var newMessage = document.createElement('div');
+                        newMessage.className = 'message';
+                        newMessage.innerHTML = '<h4>' + res.name + ' | ' + new Date(res.timestamp).toLocaleString() + '</h4><p>' + res.message + '</p>';
+                        messagesContainer.prepend(newMessage);
+                        document.getElementById('guestbook-form').reset();
+                    }
+                }
+            };
+            xhr.send('name=' + encodeURIComponent(name) + '&message=' + encodeURIComponent(message));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMessages);
+
+        function toggleAccountInfo(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        function copyAccount(id) {
+            var copyText = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(copyText).then(function() {
+                alert("계좌번호가 복사되었습니다.");
+            }, function(err) {
+                alert("복사에 실패했습니다. 다시 시도해주세요.");
+            });
+        }
+
+        // Slide show functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+                slides.forEach((slide, idx) => {
+                    slide.style.display = (idx === index) ? 'block' : 'none';
+                });
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                showSlide(currentIndex);
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                showSlide(currentIndex);
+            }
+
+            // Initial slide
+            showSlide(currentIndex);
+
+            // Auto slide show
+            let slideInterval = setInterval(nextSlide, 3000);
+
+            // Prev slide button
+            document.querySelector('.prev').addEventListener('click', function() {
+                prevSlide();
+                resetInterval();
+            });
+
+            // Next slide button
+            document.querySelector('.next').addEventListener('click', function() {
+                nextSlide();
+                resetInterval();
+            });
+
+            // Reset slide interval
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 3000);
+            }
+        });
     </script>
 </body>
 </html>
