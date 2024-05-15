@@ -144,18 +144,7 @@ button.next {
 
 
 
-.share-buttons button {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #FEE500;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.share-buttons button:nth-child(2) {
-    background-color: #00C300;
-}
 
 .customoverlay {
     position: relative;
@@ -240,16 +229,6 @@ button.next {
     margin-bottom: 20px; /* 요소 아래 여백 */
 }
 
-/* 카카오톡 공유 버튼 스타일 */
-.kakao-share-button {
-    background-color: #fee500; /* 카카오톡 색상 */
-    color: black; /* 텍스트 색상 */
-    padding: 10px 20px; /* 패딩 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    display: inline-block; /* 인라인 블록 디스플레이 */
-    cursor: pointer; /* 커서 포인터 */
-    border-radius: 5px; /* 모서리 둥글게 */
-}
 
 /* 지도 컨테이너 스타일 */
 #daumRoughmapContainer1715763488690 {
