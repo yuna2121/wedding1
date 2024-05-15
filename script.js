@@ -103,51 +103,29 @@ function loadMessages() {
         });
 }
 
-kakao.maps.load(function() {
-    var mapContainer = document.getElementById('map'),
-        mapOption = {
-            center: new kakao.maps.LatLng(37.5563, 127.0060), // Coordinates for 신라호텔 영빈관
-            level: 3 // Map zoom level
-        };
 
-    var map = new kakao.maps.Map(mapContainer, mapOption); // Create map
-
-    // Marker position
-    var markerPosition  = new kakao.maps.LatLng(37.5563, 127.0060); 
-
-    // Create marker
-    var marker = new kakao.maps.Marker({
-        position: markerPosition
-    });
-
-    marker.setMap(map); // Display the marker on the map
-});
-
-
-// SDK 초기화
-Kakao.init('d59123877a5163cbf1586b25970c56e2'); // 여기서 'YOUR_APP_KEY'는 카카오 개발자 포털에서 얻은 JavaScript 키입니다.
-
-// 공유하기 함수 설정
-function sendKakaoLink() {
-  Kakao.Link.sendDefault({
-    objectType: 'feed', // 메시지 타입
-    content: {
-      title: '청첩장', // 공유할 내용의 제목
-      description: '당신을 결혼식에 초대합니다.', // 공유할 내용의 본문
-      imageUrl: 'IMAGE_URL', // 공유할 이미지의 URL
-      link: {
-        mobileWebUrl: 'https://ce4297ca-9b0b-4c3e-85f2-e0d8b504eb77-00-m4zeaa68kodb.pike.replit.dev/', // 모바일에서 링크 클릭 시 이동할 URL
-        webUrl: 'https://ce4297ca-9b0b-4c3e-85f2-e0d8b504eb77-00-m4zeaa68kodb.pike.replit.dev/' // PC에서 링크 클릭 시 이동할 URL
-      }
-    },
-    buttons: [
-      {
-        title: '웹으로 보기', // 버튼 제목
-        link: {
-          mobileWebUrl: 'https://ce4297ca-9b0b-4c3e-85f2-e0d8b504eb77-00-m4zeaa68kodb.pike.replit.dev/', // 버튼 클릭 시 이동할 모바일 URL
-          webUrl: 'https://ce4297ca-9b0b-4c3e-85f2-e0d8b504eb77-00-m4zeaa68kodb.pike.replit.dev/' // 버튼 클릭 시 이동할 웹 URL
-        }
-      }
-    ]
-  });
+function shareLink() {
+    const el = document.createElement('textarea');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('링크가 클립보드에 복사되었습니다.');
 }
+
+function shareKakao() {
+    Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '모바일 청첩장',
+            description: '신랑 김수현 & 신부 김지원',
+            imageUrl: 'wedding-photo.jpg',  // 공유할 이미지의 URL
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href
+            }
+        }
+    });
+}
+
